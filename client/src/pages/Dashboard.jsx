@@ -43,7 +43,7 @@ const Dashboard = () => {
         setTodayOutfit(response.data.todayOutfit);
       }
     } catch (error) {
-      toast.error('Failed to load dashboard metrics');
+      toast.error(error.response?.data?.message || 'Failed to load dashboard metrics');
     } finally {
       setLoading(false);
     }

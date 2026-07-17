@@ -15,7 +15,8 @@ import {
   X,
   Upload,
   Tags,
-  DollarSign
+  DollarSign,
+  Shirt
 } from 'lucide-react';
 import { toast } from 'react-toastify';
 
@@ -79,7 +80,7 @@ const Wardrobe = () => {
         setClothes(response.data.data);
       }
     } catch (error) {
-      toast.error('Failed to load wardrobe clothes');
+      toast.error(error.response?.data?.message || 'Failed to load wardrobe clothes');
     } finally {
       setLoading(false);
     }
@@ -330,11 +331,15 @@ const Wardrobe = () => {
             >
               {/* Clothing Thumbnail */}
               <div className="h-44 w-full overflow-hidden bg-slate-100 dark:bg-slate-950 relative">
-                <img
-                  src={clothe.imageUrls[0]}
-                  alt={clothe.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
+               <img
+  src={
+    clothe.imageUrls?.[0]
+      ? `http://localhost:5000${clothe.imageUrls[0]}`
+      : "https://placehold.co/400x400?text=No+Image"
+  }
+  alt={clothe.name}
+  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+/>
                 
                 {/* Favorite badge toggling */}
                 <button
@@ -400,11 +405,15 @@ const Wardrobe = () => {
 
             {/* Thumbnail */}
             <div className="w-full md:w-1/2 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 h-64 md:h-auto">
-              <img
-                src={selectedItem.imageUrls[0]}
-                alt={selectedItem.name}
-                className="w-full h-full object-cover"
-              />
+            <img
+  src={
+    selectedItem.imageUrls?.[0]
+      ? `http://localhost:5000${selectedItem.imageUrls[0]}`
+      : "https://placehold.co/400x400?text=No+Image"
+  }
+  alt={selectedItem.name}
+  className="w-full h-full object-cover"
+/>
             </div>
 
             {/* Specifications Details */}

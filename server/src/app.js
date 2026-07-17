@@ -14,12 +14,25 @@ const analyticsRoutes = require('./routes/analyticsRoutes');
 const communityRoutes = require('./routes/communityRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 
+const mongoose = require('mongoose');
+
 const app = express();
 
 // Apply Global Middleware
 app.use(cors({ origin: '*' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Database connection validation middleware
+app.use('/api', (req, res, next) => {
+  if (mongoose.connection.readyState !== 1) {
+    return res.status(503).json({
+      success: false,
+      message: 'Database is not connected. Please verify that your MongoDB service is running, or set up your MongoDB Atlas connection string in the server\'s .env file.',
+    });
+  }
+  next();
+});
 
 // Serve static uploaded files (dual-mode local storage support)
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
