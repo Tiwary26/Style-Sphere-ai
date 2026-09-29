@@ -6,7 +6,7 @@ This project features a glassmorphic dashboard interface, responsive styling, an
 
 ---
 
-## 🚀 Key Features
+## 🚀 Key Features 
 
 * **Authentication Module:** Complete JWT security, Google Authentication mock, user streak trackers, and milestones badge awards.
 * **Wardrobe Manager:** Grid gallery with filters (category, color, season, occasion), QR code generator tags, multiple image uploads, and PDF catalog exports.
